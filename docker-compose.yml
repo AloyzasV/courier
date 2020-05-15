@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  apps:
+    image: thecodingmachine/php:7.4-v3-apache-node8
+    ports:
+      - "80:80"
+    environment:
+      APACHE_DOCUMENT_ROOT: "public/"
+      PHP_INI_MEMORY_LIMIT: "1G"
+      PHP_EXTENSION_INTL: 1
+      # Symfony
+      APP_ENV: "dev"
+      APP_SECRET: "58a84e6428d6c5a713699f9c22233c35"
+    volumes:
+      - ./:/var/www/html:rw
+    networks:
+      - app-network
+
+  mysql:
+    container_name: mysql_courier
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    restart: on-failure
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
