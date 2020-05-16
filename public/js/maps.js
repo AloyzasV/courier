@@ -34,7 +34,7 @@ function initMap() {
     
 function markerLocation() {
     var currentLocation = marker.getPosition();
-    document.getElementById('location').value = currentLocation.lat()+', '+currentLocation.lng();
+    document.getElementById('coffee_order_form_location').value = currentLocation.lat()+', '+currentLocation.lng();
 }
     
 google.maps.event.addDomListener(window, 'load', initMap);
