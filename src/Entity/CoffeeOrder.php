@@ -4,12 +4,15 @@ namespace App\Entity;
 
 use App\Repository\CoffeeOrderRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CoffeeOrderRepository::class)
  */
 class CoffeeOrder
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
