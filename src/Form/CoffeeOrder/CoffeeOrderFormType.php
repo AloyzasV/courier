@@ -23,22 +23,26 @@ class CoffeeOrderFormType extends AbstractType
                 'label' => 'Milk?',
                 'choices' => ['No' => 0, 'Yes' => 1],
                 'expanded' => true,
+                'data' => 0
             ])
             ->add('milkType', EntityType::class, [
                 'label' => 'Milk type',
                 'class' => MilkType::class,
                 'multiple' => false,
                 'expanded' => false,
+                'attr' => ['class' => 'form-control'],
                 'choice_label' => function(MilkType $milkType) {
                     return $milkType->getName();
                 },
-                'placeholder' => 'Choose'
+                'placeholder' => 'Choose',
+                'required' => false,
             ])
             ->add('cupSize', EntityType::class, [
                 'label' => 'Cup size',
                 'class' => CupSize::class,
                 'multiple' => false,
                 'expanded' => false,
+                'attr' => ['class' => 'form-control'],
                 'choice_label' => function(CupSize $cupSize) {
                     return $cupSize->getName();
                 },

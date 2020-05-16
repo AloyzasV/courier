@@ -5,6 +5,10 @@ namespace App\Entity\Order;
 use App\Repository\CoffeeOrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use App\Entity\MilkType;
+use App\Entity\CupSize;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass=CoffeeOrderRepository::class)
@@ -22,6 +26,7 @@ class CoffeeOrder implements OrderInterface
 
     /**
      * @ORM\Column(type="boolean", options={"default":"0"})
+     * @Assert\NotNull
      */
     private $milk;
 
@@ -33,11 +38,13 @@ class CoffeeOrder implements OrderInterface
     /**
      * @ORM\ManyToOne(targetEntity=App\Entity\CupSize::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank
      */
     private $cupSize;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please select delivery location")
      */
     private $location;
 
@@ -102,5 +109,17 @@ class CoffeeOrder implements OrderInterface
     public function getAddress(): ?string
     {
         return $this->location;
+    }
+
+    /**
+     * @Assert\Callback()
+     */
+    public function isPaymentIsCheck(ExecutionContextInterface $context)
+    {
+        if ($this->getMilk() == 1 and $this->getMilkType() == null) {
+            $context->buildViolation('Please select milk type')
+                ->atPath('milkType')
+                ->addViolation();
+        }
     }
 }
