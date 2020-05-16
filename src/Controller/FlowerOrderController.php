@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\FlowerOrder;
+use App\Entity\Order\FlowerOrder;
 use App\Service\FlowerOrder\FlowerOrderService;
 use App\Form\FlowerOrder\FlowerOrderFormType;
 

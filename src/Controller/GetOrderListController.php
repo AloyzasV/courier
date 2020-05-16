@@ -21,6 +21,7 @@ class GetOrderListController extends AbstractController
      */
     public function getOrderList(string $type): Response
     {
-      return new Response($this->returnTypeContext->return($type));
+        $this->returnTypeContext->return($type);
+      //return new Response());
     }
 }

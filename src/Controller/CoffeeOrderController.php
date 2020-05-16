@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\CoffeeOrder;
+use App\Entity\Order\CoffeeOrder;
 use App\Service\CoffeeOrder\CoffeeOrderService;
 use App\Form\CoffeeOrder\CoffeeOrderFormType;
 

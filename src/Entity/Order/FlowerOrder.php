@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Order;
 
 use App\Repository\FlowerOrderRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=FlowerOrderRepository::class)
  */
-class FlowerOrder
+class FlowerOrder implements OrderInterface
 {
     /**
      * @ORM\Id()

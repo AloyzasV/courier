@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\FlowerOrder;
+use App\Entity\Order\FlowerOrder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

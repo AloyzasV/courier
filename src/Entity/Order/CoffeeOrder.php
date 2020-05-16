@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Order;
 
 use App\Repository\CoffeeOrderRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 /**
  * @ORM\Entity(repositoryClass=CoffeeOrderRepository::class)
  */
-class CoffeeOrder
+class CoffeeOrder implements OrderInterface
 {
     use TimestampableEntity;
 
@@ -26,12 +26,12 @@ class CoffeeOrder
     private $milk;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MilkType::class)
+     * @ORM\ManyToOne(targetEntity=App\Entity\MilkType::class)
      */
     private $milkType;
 
     /**
-     * @ORM\ManyToOne(targetEntity=CupSize::class)
+     * @ORM\ManyToOne(targetEntity=App\Entity\CupSize::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $cupSize;
@@ -92,5 +92,15 @@ class CoffeeOrder
         $this->location = $location;
 
         return $this;
+    }
+
+    public function getDeliverOn(): ?\DateTimeInterface
+    {
+        return $this->createdAt->modify("+30 minutes");
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->location;
     }
 }

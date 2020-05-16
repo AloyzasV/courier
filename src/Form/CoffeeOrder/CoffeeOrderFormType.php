@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\CoffeeOrder;
 
-use App\Entity\CoffeeOrder;
+use App\Entity\Order\CoffeeOrder;
 use App\Entity\CupSize;
 use App\Entity\MilkType;
 use Symfony\Component\Form\AbstractType;

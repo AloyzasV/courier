@@ -25,7 +25,7 @@ class GetOrdersListService
         $this->flowerOrderRepository = $flowerOrderRepository;
     }
 
-    public function getOrders(): ArrayCollection
+    public function getAllOrders(): ArrayCollection
     {
         $coffeeOrders = $this->coffeeOrderRepository->findAll();
         $flowerOrders = $this->flowerOrderRepository->findAll();
@@ -33,6 +33,20 @@ class GetOrdersListService
         $orders = new ArrayCollection(
             array_merge($coffeeOrders, $flowerOrders)
         );
+
+        return $orders;
+    }
+
+    public function getOrdersForCourier(): Array
+    {
+        $allOrders = $this->getAllOrders();
+
+        foreach($allOrders as $order) {
+            $minifiedOrders[] = [
+                'deliverTo' => $order->getAddress(),
+                'deliverOn' => $order->getDeliverOn()->format('Y-m-d H:i'),
+            ];
+        }
 
         return $orders;
     }

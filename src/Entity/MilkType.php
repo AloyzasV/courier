@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\MilkTypeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,11 +21,6 @@ class MilkType
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-
-    public function __construct()
-    {
-        $this->coffeOrders = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
