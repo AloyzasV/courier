@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service\Strategy;
 
+use Symfony\Component\Serializer\Serializer;
+
 class XmlStrategy implements ReturnTypeStrategyInterface
 {
     private const TYPE = 'xml';
@@ -13,8 +15,8 @@ class XmlStrategy implements ReturnTypeStrategyInterface
         return self::TYPE === $type;
     }
 
-    public function return(): string
+    public function return(Array $orders, Serializer $serializer): string
     {
-        return 'return xml response';
+        return $serializer->serialize($orders, self::TYPE);
     }
 }

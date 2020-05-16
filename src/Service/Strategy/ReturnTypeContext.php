@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Service\Strategy;
 
 use App\Service\GetOrdersListService;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class ReturnTypeContext
 {
@@ -24,10 +27,11 @@ class ReturnTypeContext
     public function return(string $type): string
     {
         $orders = $this->getOrdersListService->getOrdersForCourier();
+        $serializer = new Serializer([], [new XmlEncoder(), new JsonEncoder()]);
 
         foreach ($this->strategies as $strategy) {
             if ($strategy->isReturnable($type)) {
-                return $strategy->return();
+                return $strategy->return($orders, $serializer);
             }
         }
 

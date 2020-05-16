@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service\Strategy;
 
+use Symfony\Component\Serializer\Serializer;
+
 class JsonStrategy implements ReturnTypeStrategyInterface
 {
     private const TYPE = 'json';
@@ -14,8 +16,8 @@ class JsonStrategy implements ReturnTypeStrategyInterface
         return self::TYPE === $type;
     }
 
-    public function return(): string
+    public function return(Array $orders, Serializer $serializer): string
     {
-        return 'return json response';
+        return $serializer->serialize($orders, self::TYPE);
     }
 }

@@ -42,7 +42,7 @@ class GetOrdersListService
         $allOrders = $this->getAllOrders();
 
         foreach($allOrders as $order) {
-            $minifiedOrders[] = [
+            $orders[] = [
                 'deliverTo' => $order->getAddress(),
                 'deliverOn' => $order->getDeliverOn()->format('Y-m-d H:i'),
             ];
