@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\FlowerOrder;
 
-use App\Entity\FlowerOrder;
+use App\Entity\Order\FlowerOrder;
 use Doctrine\ORM\EntityManagerInterface;
 
 class FlowerOrderService

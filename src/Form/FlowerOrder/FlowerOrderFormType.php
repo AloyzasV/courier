@@ -18,12 +18,15 @@ class FlowerOrderFormType extends AbstractType
         $builder
             ->add('address', TextType::class, [
                 'label' => 'Delivery address',
+                'attr' => ['class' => 'form-control']
             ])
             ->add('name', TextType::class, [
                 'label' => 'Flower name',
+                'attr' => ['class' => 'form-control']
             ])
-            ->add('deliver_on', DateTimeType::class, [
+            ->add('deliver_on', TextType::class, [
                 'label' => 'Delivery time',
+                'attr' => ['class' => 'form-control', 'readonly' => 'readonly']
             ])
         ;
     }

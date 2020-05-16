@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\CoffeeOrder;
 
-use App\Entity\CoffeeOrder;
+use App\Entity\Order\CoffeeOrder;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CoffeeOrderService

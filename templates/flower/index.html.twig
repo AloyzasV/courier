@@ -1,23 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FlowerController!{% endblock %}
+{% block title %}Order flowers{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    {{ form_start(form, {'action': path('flower') }) }}
+{{ form_start(form, {'action': path('flower') }) }}
+<div class="form-group">
     {{ form_row(form.address) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.deliver_on) }}
-    {{ form_row(form._token) }}
-
-    <button type="submit" class="ui large primary button">
-        Order
-    </button>
-    {{ form_end(form, {'render_rest': false}) }}
 </div>
+<div class="form-group">
+    {{ form_row(form.name) }}
+</div>
+<div class="form-group">
+    {{ form_row(form.deliver_on) }}
+</div>
+
+{{ form_row(form._token) }}
+
+<button type="submit" class="btn btn-primary">
+    Order
+</button>
+<a href="{{ path('home_page') }}" class="btn btn-warning">Back</a>
+{{ form_end(form) }}
+
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script type="text/javascript">
+        jQuery('#flower_order_form_deliver_on').datetimepicker({
+            format:'Y-m-d H:i',
+            minDate:'-1970/01/01',
+            step:10
+        });
+    </script>
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Entity\Order;
 
 use App\Repository\FlowerOrderRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=FlowerOrderRepository::class)
@@ -19,18 +20,21 @@ class FlowerOrder implements OrderInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank
      */
-    private $deliver_on;
+    private $deliverOn;
 
     public function getId(): ?int
     {
@@ -63,12 +67,12 @@ class FlowerOrder implements OrderInterface
 
     public function getDeliverOn(): ?\DateTimeInterface
     {
-        return $this->deliver_on;
+        return $this->deliverOn;
     }
 
-    public function setDeliverOn(\DateTimeInterface $deliver_on): self
+    public function setDeliverOn(string $deliverOn): self
     {
-        $this->deliver_on = $deliver_on;
+        $this->deliverOn = \DateTime::createFromFormat('Y-m-d H:i', $deliverOn);;
 
         return $this;
     }
