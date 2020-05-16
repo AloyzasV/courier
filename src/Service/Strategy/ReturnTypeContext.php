@@ -8,6 +8,7 @@ use App\Service\GetOrdersListService;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\HttpFoundation\Response;
 
 class ReturnTypeContext
 {
@@ -24,7 +25,7 @@ class ReturnTypeContext
         $this->strategies[] = $strategy;
     }
 
-    public function return(string $type): string
+    public function return(string $type): Response
     {
         $orders = $this->getOrdersListService->getOrdersForCourier();
         $serializer = new Serializer([], [new XmlEncoder(), new JsonEncoder()]);
