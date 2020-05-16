@@ -6,21 +6,21 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\GetOrdersListService;
+use App\Service\Strategy\ReturnTypeContext;
+use Symfony\Component\HttpFoundation\Response;
 
 class GetOrderListController extends AbstractController
 {
-    private $getOrdersListService;
-
-    public function __construct(GetOrdersListService $getOrdersListService)
+    public function __construct(ReturnTypeContext $returnTypeContext)
     {
-        $this->getOrdersListService = $getOrdersListService;
+        $this->returnTypeContext = $returnTypeContext;
     }
+
     /**
-     * @Route("/get-order-list", name="get_order_list")
+     * @Route("/get-order-list/{type}", name="get_order_list")
      */
-    public function getOrderList()
+    public function getOrderList(string $type): Response
     {
-        $this->getOrdersListService->getOrders();
+      return new Response($this->returnTypeContext->return($type));
     }
 }
