@@ -10,5 +10,5 @@ interface OrderInterface
 {
     public function getDeliverOn(): ?\DateTimeInterface;
 
-    public function getAddress(CoordinatesToAddressService $coordiantesService): ?string;
+    public function getDeliveryAddress(CoordinatesToAddressService $coordiantesService): ?string;
 }

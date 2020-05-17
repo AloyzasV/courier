@@ -107,7 +107,7 @@ class CoffeeOrder implements OrderInterface
         return $this->createdAt->modify("+30 minutes");
     }
 
-    public function getAddress(CoordinatesToAddressService $coordinatesService): ?string
+    public function getDeliveryAddress(CoordinatesToAddressService $coordinatesService): ?string
     {
         return $coordinatesService->convert($this->location);
     }

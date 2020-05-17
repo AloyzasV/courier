@@ -47,7 +47,7 @@ class GetOrdersListService
 
         foreach($allOrders as $order) {
             $orders[] = [
-                'deliverTo' => $order->getAddress($this->coordinatesService),
+                'deliverTo' => $order->getDeliveryAddress($this->coordinatesService),
                 'deliverOn' => $order->getDeliverOn()->format('Y-m-d H:i'),
             ];
         }

@@ -43,7 +43,7 @@ class FlowerOrder implements OrderInterface
         return $this->id;
     }
 
-    public function getAddress(CoordinatesToAddressService $coordinatesService): ?string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -77,5 +77,10 @@ class FlowerOrder implements OrderInterface
         $this->deliverOn = \DateTime::createFromFormat('Y-m-d H:i', $deliverOn);;
 
         return $this;
+    }
+
+    public function getDeliveryAddress(CoordinatesToAddressService $coordinatesService): ?string
+    {
+        return $this->address;
     }
 }
