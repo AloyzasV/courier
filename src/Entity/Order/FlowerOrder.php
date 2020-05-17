@@ -5,6 +5,7 @@ namespace App\Entity\Order;
 use App\Repository\FlowerOrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Service\CoordinatesToAddressService;
 
 /**
  * @ORM\Entity(repositoryClass=FlowerOrderRepository::class)
@@ -42,7 +43,7 @@ class FlowerOrder implements OrderInterface
         return $this->id;
     }
 
-    public function getAddress(): ?string
+    public function getAddress(CoordinatesToAddressService $coordinatesService): ?string
     {
         return $this->address;
     }

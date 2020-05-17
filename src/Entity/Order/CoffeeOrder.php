@@ -9,6 +9,7 @@ use App\Entity\MilkType;
 use App\Entity\CupSize;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use App\Service\CoordinatesToAddressService;
 
 /**
  * @ORM\Entity(repositoryClass=CoffeeOrderRepository::class)
@@ -106,9 +107,9 @@ class CoffeeOrder implements OrderInterface
         return $this->createdAt->modify("+30 minutes");
     }
 
-    public function getAddress(): ?string
+    public function getAddress(CoordinatesToAddressService $coordinatesService): ?string
     {
-        return $this->location;
+        return $coordinatesService->convert($this->location);
     }
 
     /**
