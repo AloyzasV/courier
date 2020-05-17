@@ -34,6 +34,10 @@ class ReturnTypeContext
             throw new NotFoundHttpException('No orders available');
         }
 
+        usort($orders, function ($order1, $order2) {
+            return $order1['deliverOn'] <=> $order2['deliverOn'];
+        });
+        
         $serializer = new Serializer([], [new XmlEncoder(), new JsonEncoder()]);
 
         foreach ($this->strategies as $strategy) {

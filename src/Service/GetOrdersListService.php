@@ -52,10 +52,6 @@ class GetOrdersListService
             ];
         }
         
-        usort($orders, function ($order1, $order2) {
-            return $order1['deliverOn'] <=> $order2['deliverOn'];
-        });
-
         return $orders;
     }
 }
