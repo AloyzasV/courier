@@ -51,6 +51,10 @@ class GetOrdersListService
                 'deliverOn' => $order->getDeliverOn()->format('Y-m-d H:i'),
             ];
         }
+        
+        usort($orders, function ($order1, $order2) {
+            return $order1['deliverOn'] <=> $order2['deliverOn'];
+        });
 
         return $orders;
     }
