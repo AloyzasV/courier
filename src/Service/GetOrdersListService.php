@@ -9,6 +9,7 @@ use App\Repository\CoffeeOrderRepository;
 use App\Repository\FlowerOrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Service\CoordinatesToAddressService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GetOrdersListService
 {
@@ -41,9 +42,13 @@ class GetOrdersListService
         return $orders;
     }
 
-    public function getOrdersForCourier(): Array
+    public function getOrdersForCourier(): ?Array
     {
         $allOrders = $this->getAllOrders();
+
+        if (count($allOrders) == 0 ) {
+            throw new NotFoundHttpException('No orders available');
+        }
 
         foreach($allOrders as $order) {
             $orders[] = [
@@ -51,6 +56,10 @@ class GetOrdersListService
                 'deliverOn' => $order->getDeliverOn()->format('Y-m-d H:i'),
             ];
         }
+
+        usort($orders, function ($order1, $order2) {
+            return $order1['deliverOn'] <=> $order2['deliverOn'];
+        });
         
         return $orders;
     }

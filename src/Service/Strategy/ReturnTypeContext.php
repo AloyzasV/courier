@@ -9,7 +9,6 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ReturnTypeContext
 {
@@ -29,15 +28,6 @@ class ReturnTypeContext
     public function return(string $type): Response
     {
         $orders = $this->getOrdersListService->getOrdersForCourier();
-
-        if (count($orders) == 0) {
-            throw new NotFoundHttpException('No orders available');
-        }
-
-        usort($orders, function ($order1, $order2) {
-            return $order1['deliverOn'] <=> $order2['deliverOn'];
-        });
-        
         $serializer = new Serializer([], [new XmlEncoder(), new JsonEncoder()]);
 
         foreach ($this->strategies as $strategy) {
