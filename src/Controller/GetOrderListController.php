@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\Strategy\ReturnTypeContext;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GetOrderListController extends AbstractController
 {
@@ -21,6 +22,12 @@ class GetOrderListController extends AbstractController
      */
     public function getOrderList(string $type): Response
     {
-        return $this->returnTypeContext->return($type);
+        try {
+            return $this->returnTypeContext->return($type);
+        } catch (NotFoundHttpException | \InvalidArgumentException $e) {
+            $this->addFlash('error', $e->getMessage());
+
+            return $this->redirectToRoute('home_page');
+        }
     }
 }

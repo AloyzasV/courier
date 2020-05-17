@@ -31,9 +31,7 @@ class FlowerOrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->flowerOrderService->createOrder($form->getData());
-
-            return $this->redirectToRoute('home_page');
+            return $this->handleFormSubmit($form);
         }
 
         return $this->render('flower/index.html.twig', [
@@ -46,5 +44,13 @@ class FlowerOrderController extends AbstractController
         $flowerOrder = new FlowerOrder();
 
         return $this->createForm(FlowerOrderFormType::class, $flowerOrder);
+    }
+
+    private function handleFormSubmit(FormInterface $form): Response
+    {
+        $this->flowerOrderService->createOrder($form->getData());
+        $this->addFlash('success', 'Order successfully submitted');
+
+        return $this->redirectToRoute('home_page');
     }
 }

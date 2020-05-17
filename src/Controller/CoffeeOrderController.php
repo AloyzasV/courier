@@ -31,9 +31,7 @@ class CoffeeOrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->coffeeOrderService->createOrder($form->getData());
-
-            return $this->redirectToRoute('home_page');
+            return $this->handleFormSubmit($form);
         }
 
         return $this->render('coffee/index.html.twig', [
@@ -46,5 +44,13 @@ class CoffeeOrderController extends AbstractController
         $coffeeOrder = new CoffeeOrder();
 
         return $this->createForm(CoffeeOrderFormType::class, $coffeeOrder);
+    }
+
+    private function handleFormSubmit(FormInterface $form): Response
+    {
+        $this->coffeeOrderService->createOrder($form->getData());
+        $this->addFlash('success', 'Order successfully submitted');
+
+        return $this->redirectToRoute('home_page');
     }
 }

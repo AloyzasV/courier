@@ -1,0 +1,16 @@
+label.required:before {
+    content: "* ";
+    color: red;
+}
+.form-check-label.required:before {
+    content: none;
+}
+#map {
+    width: auto;
+    height: 400px;
+    margin-bottom: 20px;
+}
+.card {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

@@ -33,6 +33,7 @@ class FlowerOrder implements OrderInterface
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank
+     * @Assert\DateTime(format="Y-m-d H:i")
      */
     private $deliverOn;
 

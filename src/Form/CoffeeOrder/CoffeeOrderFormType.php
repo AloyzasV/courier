@@ -20,7 +20,7 @@ class CoffeeOrderFormType extends AbstractType
     {
         $builder
             ->add('milk', ChoiceType::class, [
-                'label' => 'Milk?',
+                'label' => 'Coffee with milk',
                 'choices' => ['No' => 0, 'Yes' => 1],
                 'expanded' => true,
                 'data' => 0
@@ -30,28 +30,31 @@ class CoffeeOrderFormType extends AbstractType
                 'class' => MilkType::class,
                 'multiple' => false,
                 'expanded' => false,
-                'attr' => ['class' => 'form-control'],
                 'choice_label' => function(MilkType $milkType) {
                     return $milkType->getName();
                 },
                 'placeholder' => 'Choose',
                 'required' => false,
+                'row_attr' => [
+                    'class' => 'milk-type-group'
+                ],
+                'label_attr' => ['class' => 'required']
             ])
             ->add('cupSize', EntityType::class, [
                 'label' => 'Cup size',
                 'class' => CupSize::class,
                 'multiple' => false,
                 'expanded' => false,
-                'attr' => ['class' => 'form-control'],
                 'choice_label' => function(CupSize $cupSize) {
                     return $cupSize->getName();
                 },
                 'placeholder' => 'Choose'
             ])
             ->add('location', TextType::class, [
-                'label' => 'Select delivery location',
+                'label' => 'Select delivery location on map',
                 'attr' => array('hidden' => 'hidden'),
                 'required' => false,
+                'label_attr' => ['class' => 'required']
             ])
         ;
     }
